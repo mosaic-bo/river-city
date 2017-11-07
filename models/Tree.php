@@ -8,20 +8,16 @@ class Tree
 
 		$directoryTree = array();
 
-		$result = $db->query('SELECT * FROM dir_tree ORDER BY id_parent ASC');
+		$result = $db->query('SELECT * FROM dir_tree');
 
 		$i = 0;
 		while ($row = $result->fetch()) {
-			$directoryTree[$i]['id'] = $row['id'];
-			$directoryTree[$i]['name'] = $row['name'];
-			$directoryTree[$i]['id_parent'] = $row['id_parent'];
-			$directoryTree[$i]['type'] = $row['type'];
-			$directoryTree[$i]['size'] = $row['size'];
+			$directoryTree[$row['id_parent']][] = $row;
 			$i++;
+
 		}
 
 		return $directoryTree;
-
 	}
 
 	public static function getItemById($id)
@@ -37,4 +33,30 @@ class Tree
 			return $result->fetch();
 		}
 	}
+
+	public static function createTree($directoryTree, $parent_id = 0)
+	{
+		if (is_array($directoryTree) && isset($directoryTree[$parent_id])) {
+			$tree = '<ul>';
+			
+			foreach ($directoryTree[$parent_id] as $row) {
+				if ($row['type'] == 0) {
+					$tree .= '<li class="folder"><a href="/folder/' . $row['id'] . '">' . $row['name'];
+					$tree .= self::createTree($directoryTree, $row['id']);
+					$tree .= '</a></li>';
+				} else {
+					$tree .= '<li class="file"><a href="/file/' . $row['id'] . '">' . $row['name'];
+					$tree .= self::createTree($directoryTree, $row['id']);
+					$tree .= '</a></li>';
+				}
+			}
+
+			$tree .= '</ul>';
+		} else {
+			return false;
+		}
+
+		return $tree;
+	}
+
 }

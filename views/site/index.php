@@ -11,27 +11,23 @@
 		<div class="sidebar">
 			<ul>
 				<li><a href="/">Root</a></li>
-				<?php foreach ($items as $directoryItem): ?>
-				<li><a href="/folder/<?php echo $directoryItem['id']; ?>"><?php echo $directoryItem['name']; ?></a></li>
-			
-				<?php endforeach; ?>
+				<?php echo Tree::createTree($items); ?>
 			</ul>
 		</div>
 		<div class="container">
 			<div class="desc">
 				<h2>Root</h2>
-				<p>3,56 МБ, 4 папки, 1 файл</p>
-				<div class="delete"></div>
+				<p>3,56 МБ, <?php echo $countFolders . ' папки, ' . $countFiles . ' файл(ов)'; ?></p>
 			</div>
 
 			<div class="create">
 				<div class="create-item">
-					<a href="#"></a><img src="template/img/create-folder.png" alt="Создать папку">
-					<p><span class="orange">Создать папку</span></p>
+					<a href="/folder/create/"><img src="template/img/create-folder.png" alt="Создать папку">
+					<p><span class="orange">Создать папку</span></p></a>
 				</div>
 				<div class="create-item">
-					<a href="#"></a><img src="template/img/create-file.png" alt="Создать файл">
-					<p><span class="blue">Создать файл</span></p>
+					<a href="/file/create/"><img src="template/img/create-file.png" alt="Создать файл">
+					<p><span class="blue">Создать файл</span></p></a>
 				</div>
 			</div>
 			

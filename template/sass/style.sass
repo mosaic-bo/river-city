@@ -2,30 +2,35 @@
 
 html, body
 	margin: 0
+	height: 100%
 
 .wrapper
 	padding-right: 40px
+	height: 100%
+	a
+		color: #888
+		text-decoration: none
 
 .sidebar 
 	width: 30%
+	min-height: 100%
 	position: relative
 	padding: 30px 0 0 20px
 	float: left
 	background-color: #383838
 	display: inline-block
-	min-height: 500px
 	ul
 		list-style-image: url(../img/folder-closed.png)
 		font-size: 16px
 		color: #888
-		a
-			color: #888
-			text-decoration: none
-		a
-			&:active
-
-
-
+		overflow-x: hidden
+	li
+		.file
+			list-style-image: url(../img/file.png)
+	// ul
+	// 	&:hover
+	// 		list-style-image: url(../img/folder-opened.png)
+		
 .container
 	width: 65%
 	display: inline-block
@@ -39,6 +44,15 @@ html, body
 		p
 			color: #888
 			font-size: 14px
+		.save
+			position: absolute
+			top: 30px
+			right: 76px
+			background-image: url(../img/save.png)
+			width: 26px
+			height: 27px
+			float: right
+			
 		.delete
 			position: absolute
 			top: 30px
@@ -48,6 +62,7 @@ html, body
 			height: 27px
 			float: right
 	.create
+		padding-left: 40px
 		.create-item
 			width: 48%
 			display: inline-block
@@ -58,3 +73,6 @@ html, body
 				color: $blue-color
 			p
 				margin-top: 8px
+
+	.view-file
+		padding-left: 40px

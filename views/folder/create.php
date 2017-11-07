@@ -16,20 +16,17 @@
 		</div>
 		<div class="container">
 			<div class="desc">
-				<h2><?php echo $item['name']; ?></h2>
+				<h2><?php if ($item['id'] == false) echo 'Root'; else echo $item['name']; ?></h2>
 				<p>3,56 МБ, <?php echo $countFolders . ' папки, ' . $countFiles . ' файл(ов)'; ?></p>
-				<a href="/folder/delete/<?php echo $item['id']; ?>"><div class="delete"></div></a>
+				<div class="delete"></div>
 			</div>
 
 			<div class="create">
-				<div class="create-item">
-					<a href="/folder/create/<?php echo $item['id']; ?>"><img src="/template/img/create-folder.png" alt="Создать папку">
-					<p><span class="orange">Создать папку</span></p></a>
-				</div>
-				<div class="create-item">
-					<a href="/file/create/<?php echo $item['id']; ?>"><img src="/template/img/create-file.png" alt="Создать файл">
-					<p><span class="blue">Создать файл</span></p></a>
-				</div>
+				<form action="#" method="post" enctype="multipart/form-data">
+					<p>Введите имя папки:</p>
+					<input type="text" name="name" placeholder="" value="">
+					<input type="submit" name="submit" value="Создать">
+				</form>
 			</div>
 			
 		</div>

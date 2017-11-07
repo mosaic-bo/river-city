@@ -1,15 +1,12 @@
 <?php
 
-class FolderController
-{	
-	public function actionView($itemId)
-	{
+class FileController
+{
+	public function actionView($itemId) {
 		$items = Tree::getDirectoryTree();
 		$item = Tree::getItemById($itemId);
-		$countFolders = Folder::countFolders($itemId);
-		$countFiles = File::countFiles($itemId);
 
-		require_once(ROOT . '/views/folder/view.php');
+		require_once(ROOT . '/views/file/view.php');
 
 		return true;
 	}
@@ -18,13 +15,11 @@ class FolderController
 	{
 		$items = Tree::getDirectoryTree();
 		$item = Tree::getItemById($itemId);
-		$countFolders = Folder::countFolders($itemId);
-		$countFiles = File::countFiles($itemId);
-
+		
 		if (isset($_POST['submit'])) {
 			$options['name'] = $_POST['name'];
 			$options['id'] = $item['id'];
-			$options['type'] = 0;
+			$options['type'] = 1;
 			$options['size'] = 0;
 
 			$id = Folder::createFolder($options);
@@ -32,7 +27,7 @@ class FolderController
 			header("Location: /");
 		}
 
-		require_once(ROOT . '/views/folder/create.php');
+		require_once(ROOT . '/views/file/create.php');
 		return true;
 	}
 
@@ -46,7 +41,17 @@ class FolderController
 			header("Location: /");
 		}
 
-		require_once(ROOT . '/views/folder/delete.php');
+		require_once(ROOT . '/views/file/delete.php');
+		return true;
+	}
+
+	public function actionSave($itemId)
+	{
+		$items = Tree::getDirectoryTree();
+		$item = Tree::getItemById($itemId);
+
+		require_once(ROOT . '/views/file/save.php');
+
 		return true;
 	}
 }
